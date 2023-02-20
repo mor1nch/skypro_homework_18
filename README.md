@@ -1,1 +1,1 @@
-# flask-blank
+# The project in process... Please, try later.
