@@ -1,7 +1,7 @@
-from flask import request
+from flask import jsonify
 from flask_restx import Resource, Namespace
-from app.setup_db import db
-from app.dao.models.director import DirectorSchema, Director
+from app.dao.models.director import DirectorSchema
+from app.implemented import director_service
 
 director_ns = Namespace("director")
 director_schema = DirectorSchema()
@@ -11,13 +11,12 @@ directors_schema = DirectorSchema(many=True)
 @director_ns.route("/")
 class DirectorsView(Resource):
     def get(self):
-        pass
+        all_directors = director_service.get_all()
+        return jsonify(directors_schema.dump(all_directors)), 200
 
-    def post(self):
-        pass
 
-    def put(self):
-        pass
-
-    def delete(self):
-        pass
+@director_ns.route("/<int:did>")
+class DirectorView(Resource):
+    def get(self, did: int):
+        director = director_service.get_one(did)
+        return jsonify(director_schema.dump(director)), 200

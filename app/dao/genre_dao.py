@@ -1,18 +1,28 @@
+from app.dao.models.genre import Genre
+
+
 class GenreDAO:
     def __init__(self, session):
         self.session = session
 
     def get_one(self, gid):
-        pass
+        return self.session.query(Genre).get(gid)
 
     def get_all(self):
-        pass
+        return self.session.query(Genre).all()
 
-    def update(self, data):
-        pass
+    def create(self, data):
+        genre = Genre(**data)
+        self.session.add(genre)
+        self.session.commit()
+        return genre
 
-    def update_partial(self, data):
-        pass
+    def update(self, genre):
+        self.session.add(genre)
+        self.session.commit()
 
-    def delete(self, gid):
-        pass
+        return genre
+
+    def delete(self, genre):
+        self.session.delete(genre)
+        self.session.commit()
