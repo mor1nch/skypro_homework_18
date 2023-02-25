@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask_restx import Resource, Namespace
-from app.dao.models.director import DirectorSchema
-from app.implemented import director_service
+from dao.models.director import DirectorSchema
+from implemented import director_service
 
 director_ns = Namespace("director")
 director_schema = DirectorSchema()

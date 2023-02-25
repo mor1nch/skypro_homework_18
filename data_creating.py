@@ -1,6 +1,6 @@
-from app.dao.models.movie import Movie
-from app.dao.models.director import Director
-from app.dao.models.genre import Genre
+from dao.models.movie import Movie
+from dao.models.director import Director
+from dao.models.genre import Genre
 
 
 def create_data(app, db):
@@ -84,39 +84,39 @@ def create_data(app, db):
                 {"name": "Фантастика", "pk": 7}, {"name": "Аниме", "pk": 8}, {"name": "Документальное", "pk": 9},
                 {"name": "Короткометражка", "pk": 10}, {"name": "Ужасы", "pk": 11}, {"name": "Боевик", "pk": 12},
                 {"name": "Мелодрама", "pk": 13}, {"name": "Детектив", "pk": 14}, {"name": "Криминал", "pk": 15},
-                {"name": "Мультфильм", "pk": 16}, {"name": "Вестерн", "pk": 17}, {"name": "Мюзикл", "pk": 18}],
+                {"name": "Мультфильм", "pk": 16}, {"name": "Вестерн", "pk": 17}, {"name": "Мюзикл", "pk": 18}]
         }
 
-    for movie in data["movies"]:
-        m = Movie(
-            id=movie["pk"],
-            title=movie["title"],
-            description=movie["description"],
-            trailer=movie["trailer"],
-            year=movie["year"],
-            rating=movie["rating"],
-            genre_id=movie["genre_id"],
-            director_id=movie["director_id"],
-        )
+        for movie in data["movies"]:
+            m = Movie(
+                id=movie["pk"],
+                title=movie["title"],
+                description=movie["description"],
+                trailer=movie["trailer"],
+                year=movie["year"],
+                rating=movie["rating"],
+                genre_id=movie["genre_id"],
+                director_id=movie["director_id"]
+            )
 
-        db.session.add(m)
-        db.session.commit()
-        db.session.close()
+            db.session.add(m)
+            db.session.commit()
+            db.session.close()
 
-    for director in data["directors"]:
-        d = Director(
-            id=director["pk"],
-            name=director["name"],
-        )
-        db.session.add(d)
-        db.session.commit()
-        db.session.close()
+        for director in data["directors"]:
+            d = Director(
+                id=director["pk"],
+                name=director["name"]
+            )
+            db.session.add(d)
+            db.session.commit()
+            db.session.close()
 
-    for genre in data["genres"]:
-        g = Genre(
-            id=genre["pk"],
-            name=genre["name"],
-        )
-        db.session.add(g)
-        db.session.commit()
-        db.session.close()
+        for genre in data["genres"]:
+            g = Genre(
+                id=genre["pk"],
+                name=genre["name"]
+            )
+            db.session.add(g)
+            db.session.commit()
+            db.session.close()

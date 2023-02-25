@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask_restx import Resource, Namespace
-from app.dao.models.genre import GenreSchema
-from app.implemented import genre_service
+from dao.models.genre import GenreSchema
+from implemented import genre_service
 
 genre_ns = Namespace("genre")
 genre_schema = GenreSchema()
