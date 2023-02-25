@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request
 from flask_restx import Resource, Namespace
 from dao.models.movie import MovieSchema
 from implemented import movie_service
@@ -17,16 +17,19 @@ class MoviesView(Resource):
 
         if req_director_id is None and req_genre_id is None and req_year is None:
             all_movies = movie_service.get_all()
-            return jsonify(movies_schema.dump(all_movies)), 200
+            return movies_schema.dump(all_movies), 200
+
         elif req_director_id is not None:
             movies_by_director = movie_service.get_all_by_director(req_director_id)
-            return jsonify(movies_schema.dump(movies_by_director)), 200
+            return movies_schema.dump(movies_by_director), 200
+
         elif req_director_id is not None:
             movies_by_genre = movie_service.get_all_by_genre(req_genre_id)
-            return jsonify(movies_schema.dump(movies_by_genre)), 200
+            return movies_schema.dump(movies_by_genre), 200
+
         elif req_year is not None:
             movies_by_year = movie_service.get_all_by_year(req_year)
-            return jsonify(movies_schema.dump(movies_by_year)), 200
+            return movies_schema.dump(movies_by_year), 200
 
     def post(self):
         req_json = request.json
